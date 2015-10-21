@@ -3,7 +3,7 @@
 <head>
 
 <meta charset="utf-8" />
-<title>Cuadro Magico</title>
+<title>Cuadro Magico V0.1</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -172,9 +172,44 @@ div#notebook {
   <div tabindex="-1" id="notebook" class="border-box-sizing">
     <div class="container" id="notebook-container">
 
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Cuadro-Magico-(8-Puzzle)">Cuadro Magico (8-Puzzle)<a class="anchor-link" href="#Cuadro-Magico-(8-Puzzle)">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>El juego del puzzle se representa, sobre un tablero de 3x3 casillas. 8 de las casillas
+contienen una pieza o ficha que se puede deslizar a lo largo del tablero horizontal y
+verticalmente. Las fichas vienen marcadas con los números del 1 al 8, y el 0 representa a
+la casilla vacía, que permite los movimientos de las fichas. El objetivo del problema es
+partiendo de un tablero inicial con las fichas desordenadas alcanzar un tablero en el que
+todas las fichas estén ordenadas en orden creciente, dejando el hueco en la primer casilla
+del tablero. El número total de estados o tableros posibles que se pueden generar en el
+juego del puzzle es 9! = 362,880 estados.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Declaramos-el-estado-inicial-y-final">Declaramos el estado inicial y final<a class="anchor-link" href="#Declaramos-el-estado-inicial-y-final">&#182;</a></h1>
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[172]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="n">initial_config</span> <span class="o">=</span> <span class="p">[]</span><span class="c">#inicializar lista</span>
@@ -201,9 +236,18 @@ div#notebook {
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Convertimos-el-estado-inicial-(inicio)-y-final(fin)-a-string">Convertimos el estado inicial (inicio) y final(fin) a string<a class="anchor-link" href="#Convertimos-el-estado-inicial-(inicio)-y-final(fin)-a-string">&#182;</a></h1>
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[173]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="c">#initial_config</span>
@@ -222,13 +266,23 @@ div#notebook {
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Codigo-del-Cuadro-Magico">Codigo del Cuadro Magico<a class="anchor-link" href="#Codigo-del-Cuadro-Magico">&#182;</a></h1>
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[174]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">deque</span>
 <span class="kn">import</span> <span class="nn">ast</span>
+
 <span class="k">def</span> <span class="nf">cuadro_magico</span><span class="p">():</span>
     <span class="n">tamFilas</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">initial_config</span><span class="p">)</span>
     <span class="n">tamCol</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">initial_config</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
@@ -242,17 +296,12 @@ div#notebook {
         <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">tamCol</span><span class="p">):</span>
             <span class="n">datos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="k">False</span><span class="p">)</span>
         <span class="n">visitados</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">datos</span>
-    
-    <span class="c">#print(visitados)</span>
-    <span class="c">#return</span>
-    
+        
     <span class="n">auxCosto</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="c">#INICIO....inicializamos esto (el estado)</span>
     <span class="n">state</span> <span class="o">=</span> <span class="p">[</span><span class="n">initial_x</span><span class="p">,</span><span class="n">initial_y</span><span class="p">,</span><span class="mi">0</span><span class="p">,[],</span><span class="n">inicio</span><span class="p">]</span><span class="c">#state contiene el origen (x,y), el costo, y el recorrido    </span>
     <span class="n">q</span> <span class="o">=</span> <span class="n">deque</span><span class="p">()</span>
     <span class="n">q</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
-    <span class="c">#print(q)</span>
-    <span class="c">#return</span>
     <span class="c">#FIN......Inicializando Variables</span>
     
     <span class="k">if</span> <span class="n">state</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">tamFilas</span> <span class="ow">and</span> <span class="n">state</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">tamCol</span><span class="p">:</span>
@@ -263,54 +312,32 @@ div#notebook {
     
     <span class="n">recorrido</span><span class="o">=</span><span class="p">[]</span>
     
-    <span class="c">#temp = 4</span>
-    <span class="c">#nuevoConfig = &quot;aaa&quot;</span>
     <span class="c">#Inicio....Ciclo While</span>
-    <span class="c">#while temp &gt; 0:</span>
     <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">q</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
         <span class="n">estado</span> <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="n">popleft</span><span class="p">()</span><span class="c">#al inicio eliminando el primer estado, despues los elementos que estan primero FIFO</span>
         <span class="n">auxCosto</span> <span class="o">=</span> <span class="n">estado</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="c">#estado[2] es el costo del camino que se va a recorrer para lleegar al destino</span>
-        <span class="c">#tmp = estado[4]</span>
-        <span class="c">#tmp = ast.literal_eval(estado[4])</span>
-        <span class="c">#testarray[0][0] = 100000</span>
-        <span class="c">#print(&quot;tmp = &quot;,tmp)</span>
-        <span class="c">#return</span>
         
         <span class="c">#Verificando si se ha encontrado el Destino</span>
-        <span class="c">#if(estado[0] == Destino[0] and estado[1] == Destino[1]):</span>
         <span class="k">if</span><span class="p">(</span><span class="n">estado</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">==</span> <span class="n">fin</span><span class="p">):</span>
             <span class="nb">print</span><span class="p">(</span><span class="s">&quot;Se encontro el Destino:&quot;</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">estado</span>
-        <span class="c">#else:</span>
-        <span class="c">#    print(&quot;No son iguales&quot;)</span>
-        <span class="c">#    return</span>
         <span class="c">#FIN--------------------------------------</span>
-        <span class="c">#valor = tmp[estado[0]][estado[1]]#me va a sacar el 0</span>
         <span class="n">recorrido</span> <span class="o">=</span> <span class="p">[</span><span class="n">n</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">estado</span><span class="p">[</span><span class="mi">3</span><span class="p">]]</span>
         <span class="n">recorrido</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">estado</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">estado</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">recorrido</span><span class="p">)</span>
-        <span class="c">#if temp == 1:</span>
-        <span class="c">#    return</span>
+        <span class="c">#print(recorrido)</span>
+        
         <span class="c">#para x-1 arriba</span>
         <span class="n">auxTmp</span> <span class="o">=</span> <span class="n">ast</span><span class="o">.</span><span class="n">literal_eval</span><span class="p">(</span><span class="n">estado</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
         <span class="n">xx</span> <span class="o">=</span> <span class="n">estado</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>
         <span class="n">yy</span> <span class="o">=</span> <span class="n">estado</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
         <span class="k">if</span><span class="p">((</span><span class="n">xx</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">yy</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">xx</span> <span class="o">&lt;</span> <span class="n">tamFilas</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">yy</span> <span class="o">&lt;</span> <span class="n">tamCol</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">visitados</span><span class="p">[</span><span class="n">xx</span><span class="p">][</span><span class="n">yy</span><span class="p">]</span><span class="o">==</span><span class="k">False</span><span class="p">)):</span>
-        <span class="c">#if((xx&gt;=0) and (yy&gt;=0) and (xx &lt; tamFilas) and (yy &lt; tamCol) and (initial_config[xx][yy]==0) and (visitados[xx][yy]==False)):</span>
-            
-            <span class="c">#tmp y auxTmp</span>
-            <span class="c">#print(&quot;Vallor &quot;,valor)</span>
             <span class="n">valor</span> <span class="o">=</span> <span class="n">auxTmp</span><span class="p">[</span><span class="n">estado</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="n">estado</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
             <span class="n">valor2</span> <span class="o">=</span> <span class="n">auxTmp</span><span class="p">[</span><span class="n">xx</span><span class="p">][</span><span class="n">yy</span><span class="p">]</span>
             <span class="n">auxTmp</span><span class="p">[</span><span class="n">xx</span><span class="p">][</span><span class="n">yy</span><span class="p">]</span> <span class="o">=</span> <span class="n">valor</span>
-            <span class="c">#print(&quot;valor2 &quot;,valor2)</span>
             <span class="n">auxTmp</span><span class="p">[</span><span class="n">estado</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="n">estado</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="n">valor2</span>
             <span class="n">nuevoConfig</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">auxTmp</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s">&quot;NuevoConfig1 &quot;</span><span class="p">,</span><span class="n">nuevoConfig</span><span class="p">)</span>
-            <span class="c">#return</span>
         
             <span class="n">auxCosto</span> <span class="o">=</span> <span class="n">auxCosto</span><span class="o">+</span><span class="mi">1</span>
-            <span class="c">#visitados[xx][yy] = True</span>
             <span class="n">state</span> <span class="o">=</span> <span class="p">[</span><span class="n">xx</span><span class="p">,</span><span class="n">yy</span><span class="p">,</span><span class="n">auxCosto</span><span class="p">,</span><span class="n">recorrido</span><span class="p">,</span><span class="n">nuevoConfig</span><span class="p">]</span><span class="c">#state contiene el origen (x,y), el costo, y los nodos que se han visitado</span>
             <span class="n">q</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
                 
@@ -319,18 +346,13 @@ div#notebook {
         <span class="n">xx</span> <span class="o">=</span> <span class="n">estado</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="n">yy</span> <span class="o">=</span> <span class="n">estado</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
         <span class="k">if</span><span class="p">((</span><span class="n">xx</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">yy</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">xx</span> <span class="o">&lt;</span> <span class="n">tamFilas</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">yy</span> <span class="o">&lt;</span> <span class="n">tamCol</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">visitados</span><span class="p">[</span><span class="n">xx</span><span class="p">][</span><span class="n">yy</span><span class="p">]</span><span class="o">==</span><span class="k">False</span><span class="p">)):</span>
-        <span class="c">#if((xx&gt;=0) and (yy&gt;=0) and (xx &lt; tamFilas) and (yy &lt; tamCol) and (initial_config[xx][yy]==0) and (visitados[xx][yy]==False)):</span>
-            <span class="c">#tmp y auxTmp</span>
             <span class="n">valor</span> <span class="o">=</span> <span class="n">auxTmp</span><span class="p">[</span><span class="n">estado</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="n">estado</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
             <span class="n">valor2</span> <span class="o">=</span> <span class="n">auxTmp</span><span class="p">[</span><span class="n">xx</span><span class="p">][</span><span class="n">yy</span><span class="p">]</span>
             <span class="n">auxTmp</span><span class="p">[</span><span class="n">xx</span><span class="p">][</span><span class="n">yy</span><span class="p">]</span> <span class="o">=</span> <span class="n">valor</span>
             <span class="n">auxTmp</span><span class="p">[</span><span class="n">estado</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="n">estado</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="n">valor2</span>
             <span class="n">nuevoConfig</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">auxTmp</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s">&quot;NuevoConfig2 &quot;</span><span class="p">,</span><span class="n">nuevoConfig</span><span class="p">)</span>
-            <span class="c">#return</span>
             
             <span class="n">auxCosto</span> <span class="o">=</span> <span class="n">auxCosto</span><span class="o">+</span><span class="mi">1</span>
-            <span class="c">#visitados[xx][yy] = True</span>
             <span class="n">state</span> <span class="o">=</span> <span class="p">[</span><span class="n">xx</span><span class="p">,</span><span class="n">yy</span><span class="p">,</span><span class="n">auxCosto</span><span class="p">,</span><span class="n">recorrido</span><span class="p">,</span><span class="n">nuevoConfig</span><span class="p">]</span><span class="c">#state contiene el origen (x,y), el costo, y los nodos que se han visitado</span>
             <span class="n">q</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
         
@@ -339,20 +361,13 @@ div#notebook {
         <span class="n">xx</span> <span class="o">=</span> <span class="n">estado</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
         <span class="n">yy</span> <span class="o">=</span> <span class="n">estado</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
         <span class="k">if</span><span class="p">((</span><span class="n">xx</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">yy</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">xx</span> <span class="o">&lt;</span> <span class="n">tamFilas</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">yy</span> <span class="o">&lt;</span> <span class="n">tamCol</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">visitados</span><span class="p">[</span><span class="n">xx</span><span class="p">][</span><span class="n">yy</span><span class="p">]</span><span class="o">==</span><span class="k">False</span><span class="p">)):</span>
-        <span class="c">#if((xx&gt;=0) and (yy&gt;=0) and (xx &lt; tamFilas) and (yy &lt; tamCol) and (initial_config[xx][yy]==0) and (visitados[xx][yy]==False)):</span>
-            <span class="c">#tmp y auxTmp</span>
-            <span class="c">#print(&quot;Vallor &quot;,valor)</span>
-            <span class="c">#valor2 = tmp[xx][yy]</span>
             <span class="n">valor</span> <span class="o">=</span> <span class="n">auxTmp</span><span class="p">[</span><span class="n">estado</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="n">estado</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
             <span class="n">valor2</span> <span class="o">=</span> <span class="n">auxTmp</span><span class="p">[</span><span class="n">xx</span><span class="p">][</span><span class="n">yy</span><span class="p">]</span>
             <span class="n">auxTmp</span><span class="p">[</span><span class="n">xx</span><span class="p">][</span><span class="n">yy</span><span class="p">]</span> <span class="o">=</span> <span class="n">valor</span>
             <span class="n">auxTmp</span><span class="p">[</span><span class="n">estado</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="n">estado</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="n">valor2</span>
             <span class="n">nuevoConfig</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">auxTmp</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s">&quot;NuevoConfig3 &quot;</span><span class="p">,</span><span class="n">nuevoConfig</span><span class="p">)</span>
-            <span class="c">#return</span>
         
             <span class="n">auxCosto</span> <span class="o">=</span> <span class="n">auxCosto</span><span class="o">+</span><span class="mi">1</span>
-            <span class="c">#visitados[xx][yy] = True</span>
             <span class="n">state</span> <span class="o">=</span> <span class="p">[</span><span class="n">xx</span><span class="p">,</span><span class="n">yy</span><span class="p">,</span><span class="n">auxCosto</span><span class="p">,</span><span class="n">recorrido</span><span class="p">,</span><span class="n">nuevoConfig</span><span class="p">]</span><span class="c">#state contiene el origen (x,y), el costo, y los nodos que se han visitado</span>
             <span class="n">q</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
 
@@ -361,23 +376,16 @@ div#notebook {
         <span class="n">xx</span> <span class="o">=</span> <span class="n">estado</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="n">yy</span> <span class="o">=</span> <span class="n">estado</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span> 
         <span class="k">if</span><span class="p">((</span><span class="n">xx</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">yy</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">xx</span> <span class="o">&lt;</span> <span class="n">tamFilas</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">yy</span> <span class="o">&lt;</span> <span class="n">tamCol</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">visitados</span><span class="p">[</span><span class="n">xx</span><span class="p">][</span><span class="n">yy</span><span class="p">]</span><span class="o">==</span><span class="k">False</span><span class="p">)):</span>
-        <span class="c">#if((xx&gt;=0) and (yy&gt;=0) and (xx &lt; tamFilas) and (yy &lt; tamCol) and (initial_config[xx][yy]==0) and (visitados[xx][yy]==False)):</span>
-            <span class="c">#tmp y auxTmp</span>
             <span class="n">valor</span> <span class="o">=</span> <span class="n">auxTmp</span><span class="p">[</span><span class="n">estado</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="n">estado</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
             <span class="n">valor2</span> <span class="o">=</span> <span class="n">auxTmp</span><span class="p">[</span><span class="n">xx</span><span class="p">][</span><span class="n">yy</span><span class="p">]</span>
             <span class="n">auxTmp</span><span class="p">[</span><span class="n">xx</span><span class="p">][</span><span class="n">yy</span><span class="p">]</span> <span class="o">=</span> <span class="n">valor</span>
             <span class="n">auxTmp</span><span class="p">[</span><span class="n">estado</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="n">estado</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="n">valor2</span>
             <span class="n">nuevoConfig</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">auxTmp</span><span class="p">)</span>
             
-            <span class="nb">print</span><span class="p">(</span><span class="s">&quot;NuevoConfig4 &quot;</span><span class="p">,</span><span class="n">nuevoConfig</span><span class="p">)</span>
-            <span class="c">#return</span>
-            
             <span class="n">auxCosto</span> <span class="o">=</span> <span class="n">auxCosto</span><span class="o">+</span><span class="mi">1</span>
-            <span class="c">#visitados[xx][yy] = True</span>
             <span class="n">state</span> <span class="o">=</span> <span class="p">[</span><span class="n">xx</span><span class="p">,</span><span class="n">yy</span><span class="p">,</span><span class="n">auxCosto</span><span class="p">,</span><span class="n">recorrido</span><span class="p">,</span><span class="n">nuevoConfig</span><span class="p">]</span><span class="c">#state contiene el origen (x,y), el costo, y los nodos que se han visitado</span>
             <span class="n">q</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
         
-        <span class="c">#temp = temp - 1</span>
         <span class="c">#FIN WHILE</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s">&quot;No se encontro el Destino&quot;</span><span class="p">)</span>
@@ -389,9 +397,18 @@ div#notebook {
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Ejecutamos-el-codigo-y-nos-muestra-el-resultados">Ejecutamos el codigo y nos muestra el resultados<a class="anchor-link" href="#Ejecutamos-el-codigo-y-nos-muestra-el-resultados">&#182;</a></h1>
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[175]:</div>
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="n">cuadro_magico</span><span class="p">()</span>
@@ -407,34 +424,12 @@ div#notebook {
 
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>[[0, 2]]
-NuevoConfig3  [[1, 2, 5], [3, 4, 0], [6, 7, 8]]
-NuevoConfig4  [[1, 0, 2], [3, 4, 5], [6, 7, 8]]
-[[0, 2], [1, 2]]
-NuevoConfig3  [[1, 2, 5], [3, 4, 8], [6, 7, 0]]
-NuevoConfig4  [[1, 2, 5], [3, 0, 4], [6, 7, 8]]
-[[0, 2], [0, 1]]
-NuevoConfig3  [[1, 4, 2], [3, 0, 5], [6, 7, 8]]
-NuevoConfig4  [[0, 1, 2], [3, 4, 5], [6, 7, 8]]
-[[0, 2], [1, 2], [2, 2]]
-NuevoConfig1  [[1, 2, 5], [3, 4, 0], [6, 7, 8]]
-NuevoConfig4  [[1, 2, 5], [3, 4, 8], [6, 0, 7]]
-[[0, 2], [1, 2], [1, 1]]
-NuevoConfig1  [[1, 0, 5], [3, 2, 4], [6, 7, 8]]
-NuevoConfig2  [[1, 2, 5], [3, 4, 0], [6, 7, 8]]
-NuevoConfig3  [[1, 2, 5], [3, 7, 4], [6, 0, 8]]
-NuevoConfig4  [[1, 2, 5], [0, 3, 4], [6, 7, 8]]
-[[0, 2], [0, 1], [1, 1]]
-NuevoConfig1  [[1, 0, 2], [3, 4, 5], [6, 7, 8]]
-NuevoConfig2  [[1, 4, 2], [3, 5, 0], [6, 7, 8]]
-NuevoConfig3  [[1, 4, 2], [3, 7, 5], [6, 0, 8]]
-NuevoConfig4  [[1, 4, 2], [0, 3, 5], [6, 7, 8]]
-Se encontro el Destino:
+<pre>Se encontro el Destino:
 </pre>
 </div>
 </div>
 
-<div class="output_area"><div class="prompt output_prompt">Out[175]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[10]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
