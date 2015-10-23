@@ -3,7 +3,7 @@
 <head>
 
 <meta charset="utf-8" />
-<title>Cuadro Magico V0.1</title>
+<title>8-Puzzle v0.1</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -203,32 +203,27 @@ juego del puzzle es 9! = 362,880 estados.</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Declaramos-el-estado-inicial-y-final">Declaramos el estado inicial y final<a class="anchor-link" href="#Declaramos-el-estado-inicial-y-final">&#182;</a></h1>
+<h1 id="Estados-(Inicial-y-Final)">Estados (Inicial y Final)<a class="anchor-link" href="#Estados-(Inicial-y-Final)">&#182;</a></h1>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="prompt input_prompt">In&nbsp;[37]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="n">initial_config</span> <span class="o">=</span> <span class="p">[]</span><span class="c">#inicializar lista</span>
-<span class="c">#initial_config.append([2, 8, 3])</span>
-<span class="c">#initial_config.append([1, 6, 4])</span>
-<span class="c">#initial_config.append([7, 0, 5])</span>
-<span class="n">initial_config</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
-<span class="n">initial_config</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
-<span class="n">initial_config</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">])</span>
+<span class="c">#Configuracion Inicial</span>
+<span class="n">initial_config</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="n">initial_config</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+<span class="n">initial_config</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="mi">7</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
 
-
+<span class="c">#Configuracion Final (Objetivo)</span>
 <span class="n">final_config</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="c">#final_config.append([1, 2, 3])</span>
-<span class="c">#final_config.append([8, 0, 4])</span>
-<span class="c">#final_config.append([7, 6, 5])</span>
 
-<span class="n">final_config</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
-<span class="n">final_config</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
-<span class="n">final_config</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">])</span>
+<span class="n">final_config</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="n">final_config</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="mi">8</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+<span class="n">final_config</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="mi">7</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
 </pre></div>
 
 </div>
@@ -241,24 +236,18 @@ juego del puzzle es 9! = 362,880 estados.</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Convertimos-el-estado-inicial-(inicio)-y-final(fin)-a-string">Convertimos el estado inicial (inicio) y final(fin) a string<a class="anchor-link" href="#Convertimos-el-estado-inicial-(inicio)-y-final(fin)-a-string">&#182;</a></h1>
+<h1 id="Creamos-el-estado-inicial-y-se-lo-agregamos-a-la-estrcura-Cola">Creamos el estado inicial y se lo agregamos a la estrcura Cola<a class="anchor-link" href="#Creamos-el-estado-inicial-y-se-lo-agregamos-a-la-estrcura-Cola">&#182;</a></h1>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[38]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="c">#initial_config</span>
-<span class="n">inicio</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">initial_config</span><span class="p">)</span>
-<span class="n">inicio</span>
+<div class=" highlight hl-ipython3"><pre><span class="n">initial_state</span> <span class="o">=</span> <span class="p">[</span><span class="n">initial_config</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">]]</span>
+<span class="n">visitados</span> <span class="o">=</span> <span class="p">{}</span>
 <span class="n">fin</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">final_config</span><span class="p">)</span>
-<span class="n">fin</span>
-<span class="c">#initial_x = 2</span>
-<span class="c">#initial_y = 1</span>
-<span class="n">initial_x</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="n">initial_y</span> <span class="o">=</span> <span class="mi">2</span>
 </pre></div>
 
 </div>
@@ -271,17 +260,18 @@ juego del puzzle es 9! = 362,880 estados.</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Codigo-del-Cuadro-Magico">Codigo del Cuadro Magico<a class="anchor-link" href="#Codigo-del-Cuadro-Magico">&#182;</a></h1>
+<h1 id="Implementaci&#243;n-de-la-Soluci&#243;n">Implementaci&#243;n de la Soluci&#243;n<a class="anchor-link" href="#Implementaci&#243;n-de-la-Soluci&#243;n">&#182;</a></h1>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[41]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">deque</span>
-<span class="kn">import</span> <span class="nn">ast</span>
+<span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
+<span class="c">#import ast</span>
 
 <span class="k">def</span> <span class="nf">cuadro_magico</span><span class="p">():</span>
     <span class="n">tamFilas</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">initial_config</span><span class="p">)</span>
@@ -289,103 +279,74 @@ juego del puzzle es 9! = 362,880 estados.</p>
     <span class="k">if</span> <span class="n">tamFilas</span> <span class="o">!=</span> <span class="mi">3</span> <span class="ow">or</span> <span class="n">tamCol</span> <span class="o">!=</span> <span class="mi">3</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="s">&quot;Debe de ser un 8-puzzle (3x3)&quot;</span><span class="p">)</span>
         <span class="k">return</span>
-    
-    <span class="n">visitados</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">tamFilas</span><span class="p">):</span>
-        <span class="n">datos</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">tamCol</span><span class="p">):</span>
-            <span class="n">datos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="k">False</span><span class="p">)</span>
-        <span class="n">visitados</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">datos</span>
-        
+
     <span class="n">auxCosto</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="c">#INICIO....inicializamos esto (el estado)</span>
-    <span class="n">state</span> <span class="o">=</span> <span class="p">[</span><span class="n">initial_x</span><span class="p">,</span><span class="n">initial_y</span><span class="p">,</span><span class="mi">0</span><span class="p">,[],</span><span class="n">inicio</span><span class="p">]</span><span class="c">#state contiene el origen (x,y), el costo, y el recorrido    </span>
-    <span class="n">q</span> <span class="o">=</span> <span class="n">deque</span><span class="p">()</span>
-    <span class="n">q</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
-    <span class="c">#FIN......Inicializando Variables</span>
     
-    <span class="k">if</span> <span class="n">state</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">tamFilas</span> <span class="ow">and</span> <span class="n">state</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">tamCol</span><span class="p">:</span>
-        <span class="n">visitados</span><span class="p">[</span><span class="n">state</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="n">state</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="k">True</span>
-    <span class="k">else</span><span class="p">:</span>
+    <span class="c">#INICIO....inicializamos esto (el estado)</span>
+    <span class="n">q</span> <span class="o">=</span> <span class="n">deque</span><span class="p">()</span>
+    <span class="n">q</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">initial_state</span><span class="p">)</span>
+    
+    <span class="c">#FIN......Inicializando Variables</span>
+    <span class="n">coordenadas</span> <span class="o">=</span> <span class="n">initial_state</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">Xx</span> <span class="o">=</span> <span class="n">coordenadas</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">Yy</span> <span class="o">=</span> <span class="n">coordenadas</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    
+    <span class="k">if</span> <span class="n">Xx</span> <span class="o">&gt;=</span> <span class="n">tamFilas</span> <span class="ow">and</span> <span class="n">Yy</span> <span class="o">&gt;=</span> <span class="n">tamCol</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="s">&quot;X o Y esta fuera del Rango de las filas o columnas&quot;</span><span class="p">)</span>
         <span class="k">return</span>
     
     <span class="n">recorrido</span><span class="o">=</span><span class="p">[]</span>
     
     <span class="c">#Inicio....Ciclo While</span>
+    <span class="n">cont</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">q</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+        <span class="n">cont</span> <span class="o">=</span> <span class="n">cont</span> <span class="o">+</span> <span class="mi">1</span>
         <span class="n">estado</span> <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="n">popleft</span><span class="p">()</span><span class="c">#al inicio eliminando el primer estado, despues los elementos que estan primero FIFO</span>
-        <span class="n">auxCosto</span> <span class="o">=</span> <span class="n">estado</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="c">#estado[2] es el costo del camino que se va a recorrer para lleegar al destino</span>
+        <span class="c">#auxCosto = estado[2]#estado[2] es el costo del camino que se va a recorrer para lleegar al destino</span>
         
+        <span class="c">#return</span>
+        <span class="n">auxCosto</span> <span class="o">=</span> <span class="n">auxCosto</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">auxTmp</span> <span class="o">=</span> <span class="n">estado</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">visitados</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">estado</span><span class="p">[</span><span class="mi">0</span><span class="p">])]</span> <span class="o">=</span> <span class="k">True</span>
+        <span class="n">coord</span> <span class="o">=</span> <span class="n">estado</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
         <span class="c">#Verificando si se ha encontrado el Destino</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">estado</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">==</span> <span class="n">fin</span><span class="p">):</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s">&quot;Se encontro el Destino:&quot;</span><span class="p">)</span>
+        <span class="k">if</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">estado</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">==</span> <span class="n">fin</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s">&quot;Se encontro el Destino con&quot;</span><span class="p">,</span><span class="n">auxCosto</span><span class="p">,</span><span class="s">&quot; movimientos&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s">&quot;Tiempo de ejecución:&quot;</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">estado</span>
         <span class="c">#FIN--------------------------------------</span>
-        <span class="n">recorrido</span> <span class="o">=</span> <span class="p">[</span><span class="n">n</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">estado</span><span class="p">[</span><span class="mi">3</span><span class="p">]]</span>
-        <span class="n">recorrido</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">estado</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">estado</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
+        
+        <span class="c">#recorrido = [n for n in estado[3]]</span>
+        <span class="c">#recorrido.append([estado[0],estado[1]])</span>
         <span class="c">#print(recorrido)</span>
         
-        <span class="c">#para x-1 arriba</span>
-        <span class="n">auxTmp</span> <span class="o">=</span> <span class="n">ast</span><span class="o">.</span><span class="n">literal_eval</span><span class="p">(</span><span class="n">estado</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
-        <span class="n">xx</span> <span class="o">=</span> <span class="n">estado</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>
-        <span class="n">yy</span> <span class="o">=</span> <span class="n">estado</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-        <span class="k">if</span><span class="p">((</span><span class="n">xx</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">yy</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">xx</span> <span class="o">&lt;</span> <span class="n">tamFilas</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">yy</span> <span class="o">&lt;</span> <span class="n">tamCol</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">visitados</span><span class="p">[</span><span class="n">xx</span><span class="p">][</span><span class="n">yy</span><span class="p">]</span><span class="o">==</span><span class="k">False</span><span class="p">)):</span>
-            <span class="n">valor</span> <span class="o">=</span> <span class="n">auxTmp</span><span class="p">[</span><span class="n">estado</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="n">estado</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
-            <span class="n">valor2</span> <span class="o">=</span> <span class="n">auxTmp</span><span class="p">[</span><span class="n">xx</span><span class="p">][</span><span class="n">yy</span><span class="p">]</span>
-            <span class="n">auxTmp</span><span class="p">[</span><span class="n">xx</span><span class="p">][</span><span class="n">yy</span><span class="p">]</span> <span class="o">=</span> <span class="n">valor</span>
-            <span class="n">auxTmp</span><span class="p">[</span><span class="n">estado</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="n">estado</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="n">valor2</span>
-            <span class="n">nuevoConfig</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">auxTmp</span><span class="p">)</span>
+        <span class="n">mov_x</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span>  <span class="mi">0</span><span class="p">,</span>  <span class="mi">1</span><span class="p">,</span>  <span class="mi">0</span><span class="p">]</span><span class="c">#movimientos en x----u,r,d,l</span>
+        <span class="n">mov_y</span> <span class="o">=</span> <span class="p">[</span> <span class="mi">0</span><span class="p">,</span>  <span class="mi">1</span><span class="p">,</span>  <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="c">#movimientos en y----u,r,d,l</span>
         
-            <span class="n">auxCosto</span> <span class="o">=</span> <span class="n">auxCosto</span><span class="o">+</span><span class="mi">1</span>
-            <span class="n">state</span> <span class="o">=</span> <span class="p">[</span><span class="n">xx</span><span class="p">,</span><span class="n">yy</span><span class="p">,</span><span class="n">auxCosto</span><span class="p">,</span><span class="n">recorrido</span><span class="p">,</span><span class="n">nuevoConfig</span><span class="p">]</span><span class="c">#state contiene el origen (x,y), el costo, y los nodos que se han visitado</span>
-            <span class="n">q</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s">&quot;Iteracion &quot;</span><span class="p">,</span><span class="n">cont</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s">&quot;Estado &quot;</span><span class="p">,</span><span class="n">estado</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+            <span class="n">xx</span> <span class="o">=</span> <span class="n">coord</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">mov_x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">yy</span> <span class="o">=</span> <span class="n">coord</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">mov_y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="k">if</span><span class="p">((</span><span class="n">xx</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">yy</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">xx</span> <span class="o">&lt;</span> <span class="n">tamFilas</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">yy</span> <span class="o">&lt;</span> <span class="n">tamCol</span><span class="p">)):</span>
+                <span class="n">valor</span> <span class="o">=</span> <span class="n">auxTmp</span><span class="p">[</span><span class="n">coord</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="n">coord</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+                <span class="n">valor2</span> <span class="o">=</span> <span class="n">auxTmp</span><span class="p">[</span><span class="n">xx</span><span class="p">][</span><span class="n">yy</span><span class="p">]</span>
+                <span class="n">auxTmp</span><span class="p">[</span><span class="n">xx</span><span class="p">][</span><span class="n">yy</span><span class="p">]</span> <span class="o">=</span> <span class="n">valor</span>
+                <span class="n">auxTmp</span><span class="p">[</span><span class="n">coord</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="n">coord</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="n">valor2</span>
                 
-        <span class="c">#para y+1 derecha</span>
-        <span class="n">auxTmp</span> <span class="o">=</span> <span class="n">ast</span><span class="o">.</span><span class="n">literal_eval</span><span class="p">(</span><span class="n">estado</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
-        <span class="n">xx</span> <span class="o">=</span> <span class="n">estado</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="n">yy</span> <span class="o">=</span> <span class="n">estado</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
-        <span class="k">if</span><span class="p">((</span><span class="n">xx</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">yy</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">xx</span> <span class="o">&lt;</span> <span class="n">tamFilas</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">yy</span> <span class="o">&lt;</span> <span class="n">tamCol</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">visitados</span><span class="p">[</span><span class="n">xx</span><span class="p">][</span><span class="n">yy</span><span class="p">]</span><span class="o">==</span><span class="k">False</span><span class="p">)):</span>
-            <span class="n">valor</span> <span class="o">=</span> <span class="n">auxTmp</span><span class="p">[</span><span class="n">estado</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="n">estado</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
-            <span class="n">valor2</span> <span class="o">=</span> <span class="n">auxTmp</span><span class="p">[</span><span class="n">xx</span><span class="p">][</span><span class="n">yy</span><span class="p">]</span>
-            <span class="n">auxTmp</span><span class="p">[</span><span class="n">xx</span><span class="p">][</span><span class="n">yy</span><span class="p">]</span> <span class="o">=</span> <span class="n">valor</span>
-            <span class="n">auxTmp</span><span class="p">[</span><span class="n">estado</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="n">estado</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="n">valor2</span>
-            <span class="n">nuevoConfig</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">auxTmp</span><span class="p">)</span>
-            
-            <span class="n">auxCosto</span> <span class="o">=</span> <span class="n">auxCosto</span><span class="o">+</span><span class="mi">1</span>
-            <span class="n">state</span> <span class="o">=</span> <span class="p">[</span><span class="n">xx</span><span class="p">,</span><span class="n">yy</span><span class="p">,</span><span class="n">auxCosto</span><span class="p">,</span><span class="n">recorrido</span><span class="p">,</span><span class="n">nuevoConfig</span><span class="p">]</span><span class="c">#state contiene el origen (x,y), el costo, y los nodos que se han visitado</span>
-            <span class="n">q</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
-        
-        <span class="c">#para x+1 abajo</span>
-        <span class="n">auxTmp</span> <span class="o">=</span> <span class="n">ast</span><span class="o">.</span><span class="n">literal_eval</span><span class="p">(</span><span class="n">estado</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
-        <span class="n">xx</span> <span class="o">=</span> <span class="n">estado</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
-        <span class="n">yy</span> <span class="o">=</span> <span class="n">estado</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-        <span class="k">if</span><span class="p">((</span><span class="n">xx</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">yy</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">xx</span> <span class="o">&lt;</span> <span class="n">tamFilas</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">yy</span> <span class="o">&lt;</span> <span class="n">tamCol</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">visitados</span><span class="p">[</span><span class="n">xx</span><span class="p">][</span><span class="n">yy</span><span class="p">]</span><span class="o">==</span><span class="k">False</span><span class="p">)):</span>
-            <span class="n">valor</span> <span class="o">=</span> <span class="n">auxTmp</span><span class="p">[</span><span class="n">estado</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="n">estado</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
-            <span class="n">valor2</span> <span class="o">=</span> <span class="n">auxTmp</span><span class="p">[</span><span class="n">xx</span><span class="p">][</span><span class="n">yy</span><span class="p">]</span>
-            <span class="n">auxTmp</span><span class="p">[</span><span class="n">xx</span><span class="p">][</span><span class="n">yy</span><span class="p">]</span> <span class="o">=</span> <span class="n">valor</span>
-            <span class="n">auxTmp</span><span class="p">[</span><span class="n">estado</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="n">estado</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="n">valor2</span>
-            <span class="n">nuevoConfig</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">auxTmp</span><span class="p">)</span>
-        
-            <span class="n">auxCosto</span> <span class="o">=</span> <span class="n">auxCosto</span><span class="o">+</span><span class="mi">1</span>
-            <span class="n">state</span> <span class="o">=</span> <span class="p">[</span><span class="n">xx</span><span class="p">,</span><span class="n">yy</span><span class="p">,</span><span class="n">auxCosto</span><span class="p">,</span><span class="n">recorrido</span><span class="p">,</span><span class="n">nuevoConfig</span><span class="p">]</span><span class="c">#state contiene el origen (x,y), el costo, y los nodos que se han visitado</span>
-            <span class="n">q</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
-
-        <span class="c">#para y-1 izquierda</span>
-        <span class="n">auxTmp</span> <span class="o">=</span> <span class="n">ast</span><span class="o">.</span><span class="n">literal_eval</span><span class="p">(</span><span class="n">estado</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
-        <span class="n">xx</span> <span class="o">=</span> <span class="n">estado</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="n">yy</span> <span class="o">=</span> <span class="n">estado</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span> 
-        <span class="k">if</span><span class="p">((</span><span class="n">xx</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">yy</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">xx</span> <span class="o">&lt;</span> <span class="n">tamFilas</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">yy</span> <span class="o">&lt;</span> <span class="n">tamCol</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">visitados</span><span class="p">[</span><span class="n">xx</span><span class="p">][</span><span class="n">yy</span><span class="p">]</span><span class="o">==</span><span class="k">False</span><span class="p">)):</span>
-            <span class="n">valor</span> <span class="o">=</span> <span class="n">auxTmp</span><span class="p">[</span><span class="n">estado</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="n">estado</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
-            <span class="n">valor2</span> <span class="o">=</span> <span class="n">auxTmp</span><span class="p">[</span><span class="n">xx</span><span class="p">][</span><span class="n">yy</span><span class="p">]</span>
-            <span class="n">auxTmp</span><span class="p">[</span><span class="n">xx</span><span class="p">][</span><span class="n">yy</span><span class="p">]</span> <span class="o">=</span> <span class="n">valor</span>
-            <span class="n">auxTmp</span><span class="p">[</span><span class="n">estado</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="n">estado</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="n">valor2</span>
-            <span class="n">nuevoConfig</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">auxTmp</span><span class="p">)</span>
-            
-            <span class="n">auxCosto</span> <span class="o">=</span> <span class="n">auxCosto</span><span class="o">+</span><span class="mi">1</span>
-            <span class="n">state</span> <span class="o">=</span> <span class="p">[</span><span class="n">xx</span><span class="p">,</span><span class="n">yy</span><span class="p">,</span><span class="n">auxCosto</span><span class="p">,</span><span class="n">recorrido</span><span class="p">,</span><span class="n">nuevoConfig</span><span class="p">]</span><span class="c">#state contiene el origen (x,y), el costo, y los nodos que se han visitado</span>
-            <span class="n">q</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
-        
+                <span class="n">nuevoConfig</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">auxTmp</span><span class="p">)</span>
+                
+                <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="s">&quot;: &quot;</span><span class="p">,</span><span class="n">nuevoConfig</span><span class="p">)</span>
+                
+                <span class="k">if</span> <span class="ow">not</span> <span class="nb">str</span><span class="p">(</span><span class="n">nuevoConfig</span><span class="p">)</span> <span class="ow">in</span> <span class="n">visitados</span><span class="p">:</span>
+                    <span class="n">state</span> <span class="o">=</span> <span class="p">[</span><span class="n">nuevoConfig</span><span class="p">,[</span><span class="n">xx</span><span class="p">,</span><span class="n">yy</span><span class="p">]]</span><span class="c">#</span>
+                    <span class="n">q</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+                <span class="c">#else:</span>
+                    <span class="c">#print(&quot;Ya esxiste este estado 1: &quot;,nuevoConfig)</span>
+                
+                <span class="n">auxTmp</span><span class="p">[</span><span class="n">xx</span><span class="p">][</span><span class="n">yy</span><span class="p">]</span> <span class="o">=</span> <span class="n">valor2</span>
+                <span class="n">auxTmp</span><span class="p">[</span><span class="n">coord</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="n">coord</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="mi">0</span> 
+        <span class="nb">print</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span>
         <span class="c">#FIN WHILE</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s">&quot;No se encontro el Destino&quot;</span><span class="p">)</span>
@@ -397,21 +358,12 @@ juego del puzzle es 9! = 362,880 estados.</p>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Ejecutamos-el-codigo-y-nos-muestra-el-resultados">Ejecutamos el codigo y nos muestra el resultados<a class="anchor-link" href="#Ejecutamos-el-codigo-y-nos-muestra-el-resultados">&#182;</a></h1>
-</div>
-</div>
-</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[40]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="n">cuadro_magico</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span class="o">%</span><span class="k">time</span> cuadro_magico()
 </pre></div>
 
 </div>
@@ -424,16 +376,257 @@ juego del puzzle es 9! = 362,880 estados.</p>
 
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Se encontro el Destino:
+<pre>Iteracion  1
+Estado  [[2, 8, 3], [1, 6, 4], [7, 0, 5]]
+0 :  [[2, 8, 3], [1, 0, 4], [7, 6, 5]]
+1 :  [[2, 8, 3], [1, 6, 4], [7, 5, 0]]
+3 :  [[2, 8, 3], [1, 6, 4], [0, 7, 5]]
+
+
+Iteracion  2
+Estado  [[2, 8, 3], [1, 0, 4], [7, 6, 5]]
+0 :  [[2, 0, 3], [1, 8, 4], [7, 6, 5]]
+1 :  [[2, 8, 3], [1, 4, 0], [7, 6, 5]]
+2 :  [[2, 8, 3], [1, 6, 4], [7, 0, 5]]
+3 :  [[2, 8, 3], [0, 1, 4], [7, 6, 5]]
+
+
+Iteracion  3
+Estado  [[2, 8, 3], [1, 6, 4], [7, 5, 0]]
+0 :  [[2, 8, 3], [1, 6, 0], [7, 5, 4]]
+3 :  [[2, 8, 3], [1, 6, 4], [7, 0, 5]]
+
+
+Iteracion  4
+Estado  [[2, 8, 3], [1, 6, 4], [0, 7, 5]]
+0 :  [[2, 8, 3], [0, 6, 4], [1, 7, 5]]
+1 :  [[2, 8, 3], [1, 6, 4], [7, 0, 5]]
+
+
+Iteracion  5
+Estado  [[2, 0, 3], [1, 8, 4], [7, 6, 5]]
+1 :  [[2, 3, 0], [1, 8, 4], [7, 6, 5]]
+2 :  [[2, 8, 3], [1, 0, 4], [7, 6, 5]]
+3 :  [[0, 2, 3], [1, 8, 4], [7, 6, 5]]
+
+
+Iteracion  6
+Estado  [[2, 8, 3], [1, 4, 0], [7, 6, 5]]
+0 :  [[2, 8, 0], [1, 4, 3], [7, 6, 5]]
+2 :  [[2, 8, 3], [1, 4, 5], [7, 6, 0]]
+3 :  [[2, 8, 3], [1, 0, 4], [7, 6, 5]]
+
+
+Iteracion  7
+Estado  [[2, 8, 3], [0, 1, 4], [7, 6, 5]]
+0 :  [[0, 8, 3], [2, 1, 4], [7, 6, 5]]
+1 :  [[2, 8, 3], [1, 0, 4], [7, 6, 5]]
+2 :  [[2, 8, 3], [7, 1, 4], [0, 6, 5]]
+
+
+Iteracion  8
+Estado  [[2, 8, 3], [1, 6, 0], [7, 5, 4]]
+0 :  [[2, 8, 0], [1, 6, 3], [7, 5, 4]]
+2 :  [[2, 8, 3], [1, 6, 4], [7, 5, 0]]
+3 :  [[2, 8, 3], [1, 0, 6], [7, 5, 4]]
+
+
+Iteracion  9
+Estado  [[2, 8, 3], [0, 6, 4], [1, 7, 5]]
+0 :  [[0, 8, 3], [2, 6, 4], [1, 7, 5]]
+1 :  [[2, 8, 3], [6, 0, 4], [1, 7, 5]]
+2 :  [[2, 8, 3], [1, 6, 4], [0, 7, 5]]
+
+
+Iteracion  10
+Estado  [[2, 3, 0], [1, 8, 4], [7, 6, 5]]
+2 :  [[2, 3, 4], [1, 8, 0], [7, 6, 5]]
+3 :  [[2, 0, 3], [1, 8, 4], [7, 6, 5]]
+
+
+Iteracion  11
+Estado  [[0, 2, 3], [1, 8, 4], [7, 6, 5]]
+1 :  [[2, 0, 3], [1, 8, 4], [7, 6, 5]]
+2 :  [[1, 2, 3], [0, 8, 4], [7, 6, 5]]
+
+
+Iteracion  12
+Estado  [[2, 8, 0], [1, 4, 3], [7, 6, 5]]
+2 :  [[2, 8, 3], [1, 4, 0], [7, 6, 5]]
+3 :  [[2, 0, 8], [1, 4, 3], [7, 6, 5]]
+
+
+Iteracion  13
+Estado  [[2, 8, 3], [1, 4, 5], [7, 6, 0]]
+0 :  [[2, 8, 3], [1, 4, 0], [7, 6, 5]]
+3 :  [[2, 8, 3], [1, 4, 5], [7, 0, 6]]
+
+
+Iteracion  14
+Estado  [[0, 8, 3], [2, 1, 4], [7, 6, 5]]
+1 :  [[8, 0, 3], [2, 1, 4], [7, 6, 5]]
+2 :  [[2, 8, 3], [0, 1, 4], [7, 6, 5]]
+
+
+Iteracion  15
+Estado  [[2, 8, 3], [7, 1, 4], [0, 6, 5]]
+0 :  [[2, 8, 3], [0, 1, 4], [7, 6, 5]]
+1 :  [[2, 8, 3], [7, 1, 4], [6, 0, 5]]
+
+
+Iteracion  16
+Estado  [[2, 8, 0], [1, 6, 3], [7, 5, 4]]
+2 :  [[2, 8, 3], [1, 6, 0], [7, 5, 4]]
+3 :  [[2, 0, 8], [1, 6, 3], [7, 5, 4]]
+
+
+Iteracion  17
+Estado  [[2, 8, 3], [1, 0, 6], [7, 5, 4]]
+0 :  [[2, 0, 3], [1, 8, 6], [7, 5, 4]]
+1 :  [[2, 8, 3], [1, 6, 0], [7, 5, 4]]
+2 :  [[2, 8, 3], [1, 5, 6], [7, 0, 4]]
+3 :  [[2, 8, 3], [0, 1, 6], [7, 5, 4]]
+
+
+Iteracion  18
+Estado  [[0, 8, 3], [2, 6, 4], [1, 7, 5]]
+1 :  [[8, 0, 3], [2, 6, 4], [1, 7, 5]]
+2 :  [[2, 8, 3], [0, 6, 4], [1, 7, 5]]
+
+
+Iteracion  19
+Estado  [[2, 8, 3], [6, 0, 4], [1, 7, 5]]
+0 :  [[2, 0, 3], [6, 8, 4], [1, 7, 5]]
+1 :  [[2, 8, 3], [6, 4, 0], [1, 7, 5]]
+2 :  [[2, 8, 3], [6, 7, 4], [1, 0, 5]]
+3 :  [[2, 8, 3], [0, 6, 4], [1, 7, 5]]
+
+
+Iteracion  20
+Estado  [[2, 3, 4], [1, 8, 0], [7, 6, 5]]
+0 :  [[2, 3, 0], [1, 8, 4], [7, 6, 5]]
+2 :  [[2, 3, 4], [1, 8, 5], [7, 6, 0]]
+3 :  [[2, 3, 4], [1, 0, 8], [7, 6, 5]]
+
+
+Iteracion  21
+Estado  [[1, 2, 3], [0, 8, 4], [7, 6, 5]]
+0 :  [[0, 2, 3], [1, 8, 4], [7, 6, 5]]
+1 :  [[1, 2, 3], [8, 0, 4], [7, 6, 5]]
+2 :  [[1, 2, 3], [7, 8, 4], [0, 6, 5]]
+
+
+Iteracion  22
+Estado  [[2, 0, 8], [1, 4, 3], [7, 6, 5]]
+1 :  [[2, 8, 0], [1, 4, 3], [7, 6, 5]]
+2 :  [[2, 4, 8], [1, 0, 3], [7, 6, 5]]
+3 :  [[0, 2, 8], [1, 4, 3], [7, 6, 5]]
+
+
+Iteracion  23
+Estado  [[2, 8, 3], [1, 4, 5], [7, 0, 6]]
+0 :  [[2, 8, 3], [1, 0, 5], [7, 4, 6]]
+1 :  [[2, 8, 3], [1, 4, 5], [7, 6, 0]]
+3 :  [[2, 8, 3], [1, 4, 5], [0, 7, 6]]
+
+
+Iteracion  24
+Estado  [[8, 0, 3], [2, 1, 4], [7, 6, 5]]
+1 :  [[8, 3, 0], [2, 1, 4], [7, 6, 5]]
+2 :  [[8, 1, 3], [2, 0, 4], [7, 6, 5]]
+3 :  [[0, 8, 3], [2, 1, 4], [7, 6, 5]]
+
+
+Iteracion  25
+Estado  [[2, 8, 3], [7, 1, 4], [6, 0, 5]]
+0 :  [[2, 8, 3], [7, 0, 4], [6, 1, 5]]
+1 :  [[2, 8, 3], [7, 1, 4], [6, 5, 0]]
+3 :  [[2, 8, 3], [7, 1, 4], [0, 6, 5]]
+
+
+Iteracion  26
+Estado  [[2, 0, 8], [1, 6, 3], [7, 5, 4]]
+1 :  [[2, 8, 0], [1, 6, 3], [7, 5, 4]]
+2 :  [[2, 6, 8], [1, 0, 3], [7, 5, 4]]
+3 :  [[0, 2, 8], [1, 6, 3], [7, 5, 4]]
+
+
+Iteracion  27
+Estado  [[2, 0, 3], [1, 8, 6], [7, 5, 4]]
+1 :  [[2, 3, 0], [1, 8, 6], [7, 5, 4]]
+2 :  [[2, 8, 3], [1, 0, 6], [7, 5, 4]]
+3 :  [[0, 2, 3], [1, 8, 6], [7, 5, 4]]
+
+
+Iteracion  28
+Estado  [[2, 8, 3], [1, 5, 6], [7, 0, 4]]
+0 :  [[2, 8, 3], [1, 0, 6], [7, 5, 4]]
+1 :  [[2, 8, 3], [1, 5, 6], [7, 4, 0]]
+3 :  [[2, 8, 3], [1, 5, 6], [0, 7, 4]]
+
+
+Iteracion  29
+Estado  [[2, 8, 3], [0, 1, 6], [7, 5, 4]]
+0 :  [[0, 8, 3], [2, 1, 6], [7, 5, 4]]
+1 :  [[2, 8, 3], [1, 0, 6], [7, 5, 4]]
+2 :  [[2, 8, 3], [7, 1, 6], [0, 5, 4]]
+
+
+Iteracion  30
+Estado  [[8, 0, 3], [2, 6, 4], [1, 7, 5]]
+1 :  [[8, 3, 0], [2, 6, 4], [1, 7, 5]]
+2 :  [[8, 6, 3], [2, 0, 4], [1, 7, 5]]
+3 :  [[0, 8, 3], [2, 6, 4], [1, 7, 5]]
+
+
+Iteracion  31
+Estado  [[2, 0, 3], [6, 8, 4], [1, 7, 5]]
+1 :  [[2, 3, 0], [6, 8, 4], [1, 7, 5]]
+2 :  [[2, 8, 3], [6, 0, 4], [1, 7, 5]]
+3 :  [[0, 2, 3], [6, 8, 4], [1, 7, 5]]
+
+
+Iteracion  32
+Estado  [[2, 8, 3], [6, 4, 0], [1, 7, 5]]
+0 :  [[2, 8, 0], [6, 4, 3], [1, 7, 5]]
+2 :  [[2, 8, 3], [6, 4, 5], [1, 7, 0]]
+3 :  [[2, 8, 3], [6, 0, 4], [1, 7, 5]]
+
+
+Iteracion  33
+Estado  [[2, 8, 3], [6, 7, 4], [1, 0, 5]]
+0 :  [[2, 8, 3], [6, 0, 4], [1, 7, 5]]
+1 :  [[2, 8, 3], [6, 7, 4], [1, 5, 0]]
+3 :  [[2, 8, 3], [6, 7, 4], [0, 1, 5]]
+
+
+Iteracion  34
+Estado  [[2, 3, 4], [1, 8, 5], [7, 6, 0]]
+0 :  [[2, 3, 4], [1, 8, 0], [7, 6, 5]]
+3 :  [[2, 3, 4], [1, 8, 5], [7, 0, 6]]
+
+
+Iteracion  35
+Estado  [[2, 3, 4], [1, 0, 8], [7, 6, 5]]
+0 :  [[2, 0, 4], [1, 3, 8], [7, 6, 5]]
+1 :  [[2, 3, 4], [1, 8, 0], [7, 6, 5]]
+2 :  [[2, 3, 4], [1, 6, 8], [7, 0, 5]]
+3 :  [[2, 3, 4], [0, 1, 8], [7, 6, 5]]
+
+
+Se encontro el Destino con 36  movimientos
+Tiempo de ejecución
+CPU times: user 16 ms, sys: 0 ns, total: 16 ms
+Wall time: 15.5 ms
 </pre>
 </div>
 </div>
 
-<div class="output_area"><div class="prompt output_prompt">Out[10]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[40]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>[0, 0, 4, [[0, 2], [0, 1]], &apos;[[0, 1, 2], [3, 4, 5], [6, 7, 8]]&apos;]</pre>
+<pre>[[[1, 2, 3], [8, 0, 4], [7, 6, 5]], [1, 1]]</pre>
 </div>
 
 </div>
