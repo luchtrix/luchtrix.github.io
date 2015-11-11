@@ -3,7 +3,7 @@
 <head>
 
 <meta charset="utf-8" />
-<title>Examen1 - Canibales y Misioneros</title>
+<title>Examen1 - Apocalypsis</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -186,8 +186,8 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Se tiene 3 canibales y 3 misioneros en una isla (lado izquierdo), en medio se tiene un río y lo que se pretende es pasar a los 6 del otro lado (Derecho) por medio de un bote, considerando que en el bote pueden pasar 2 personas como máximo y que en ningún lado (izquierdo y derecho) queden mas canibales que misioneros pues se los pueden comer ( es la única restricción).
-Entonces, ¿Cuál sería la estrategia a utilizar para que todas las personas puedan pasar al lado derecho del río sin perder a nadie en el proceso?</p>
+<p>Se tiene 3 canibales y 3 misioneros en una isla (lado izquierdo), en medio se tiene un río y lo que se pretende es pasar a los 6 del otro lado (Derecho) por medio de un bote, considerando que en el bote pueden pasar 2 personas como máximo y que en ningún lado (izquierdo y derecho) queden mas canibales que misioneros pues se los pueden comer ( es la única restricción).</p>
+<p>Entonces, ¿Cuál sería la estrategia a utilizar para que todas las personas puedan pasar al lado derecho del río sin perder a nadie en el proceso?</p>
 
 </div>
 </div>
@@ -197,13 +197,13 @@ Entonces, ¿Cuál sería la estrategia a utilizar para que todas las personas pu
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Importando-la-estructura-que-se-va-a-utilizar-(DEQUE)">Importando la estructura que se va a utilizar (DEQUE)<a class="anchor-link" href="#Importando-la-estructura-que-se-va-a-utilizar-(DEQUE)">&#182;</a></h1>
+<h2 id="Importando-la-estructura-que-se-va-a-utilizar-(DEQUE)">Importando la estructura que se va a utilizar (DEQUE)<a class="anchor-link" href="#Importando-la-estructura-que-se-va-a-utilizar-(DEQUE)">&#182;</a></h2>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[51]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">deque</span>
@@ -219,14 +219,14 @@ Entonces, ¿Cuál sería la estrategia a utilizar para que todas las personas pu
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Representaci&#243;n-del-problema">Representaci&#243;n del problema<a class="anchor-link" href="#Representaci&#243;n-del-problema">&#182;</a></h1><p>Declarando mi configuración inicial (Los canibales y misioneros del lado izquierdo), y la configuración final a la que se espera llegar (Todos del lado derecho)</p>
+<h2 id="Representaci&#243;n-del-problema">Representaci&#243;n del problema<a class="anchor-link" href="#Representaci&#243;n-del-problema">&#182;</a></h2><p>Declarando mi configuración inicial (Los canibales y misioneros del lado izquierdo), y la configuración final a la que se espera llegar (Todos del lado derecho)</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[52]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="n">initial_config</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="c">#Canibales Izquierdo, Misioneros Izq, Bote Izq, Can Der, Mis Der, Bote der</span>
@@ -243,13 +243,20 @@ Entonces, ¿Cuál sería la estrategia a utilizar para que todas las personas pu
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Inicializando-visitados-para-albergar-todos-los-estados-a-los-cuales-ya-se-pas&#243;,-y-as&#237;-evitar-ciclos.">Inicializando visitados para albergar todos los estados a los cuales ya se pas&#243;, y as&#237; evitar ciclos.<a class="anchor-link" href="#Inicializando-visitados-para-albergar-todos-los-estados-a-los-cuales-ya-se-pas&#243;,-y-as&#237;-evitar-ciclos.">&#182;</a></h3>
+<h4 id="Explicando-el-arreglo:">Explicando el arreglo:<a class="anchor-link" href="#Explicando-el-arreglo:">&#182;</a></h4><ul>
+<li>Las primeras tres posiciones pertenecen al lado izquierdo y los otros restantes el derecho.</li>
+<li><p>Estructura del arreglo:</p>
+<p>[Canibal izquierdo , Misionero Izquierdo , BoteIzquiero , Canibal Derecho , Misionero Derecho , Bote Derecho]</p>
+</li>
+<li>Y por último la configuración final a la que se pretende llegar, dejando ver que todos los misioneros y canibales, hasta el bote estan del lado derecho.</li>
+</ul>
+<h2 id="Inicializando-visitados-para-albergar-todos-los-estados-a-los-cuales-ya-se-pas&#243;,-y-evitar-ciclos.">Inicializando visitados para albergar todos los estados a los cuales ya se pas&#243;, y evitar ciclos.<a class="anchor-link" href="#Inicializando-visitados-para-albergar-todos-los-estados-a-los-cuales-ya-se-pas&#243;,-y-evitar-ciclos.">&#182;</a></h2>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[53]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="n">visitados</span> <span class="o">=</span> <span class="p">{}</span>
@@ -267,49 +274,51 @@ Entonces, ¿Cuál sería la estrategia a utilizar para que todas las personas pu
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Soluci&#243;n-del-Problema">Soluci&#243;n del Problema<a class="anchor-link" href="#Soluci&#243;n-del-Problema">&#182;</a></h1><p>A continuación se presenta el algoritmo que ha de resolver este problema de transportar canibales y misioneros.
-En la solución del problema se utiliza una cola (deque) para ir guardando los nuevos estados a partir de la condiguración inicial (initial_config), considerando 5 casos para la generación de nuevos estados:
-1.-Trasladar a dos canibales en el bote
-2.-Trasladar a dos misioneros en el bote
-3.-Trasladar a un misionero y a un caníbal en el bote
-4.-Trasladar solo a un misionero en el bote
-5.-Trasladar solo a un caníbal en el bote</p>
-<p>También se lleva un control de que lado esta el bote, por ejemplo:
-[2,2,0,1,1,1], significa que el bote (1) esta del lado derecho.</p>
+<h2 id="Soluci&#243;n-del-Problema">Soluci&#243;n del Problema<a class="anchor-link" href="#Soluci&#243;n-del-Problema">&#182;</a></h2><p>A continuación se presenta el algoritmo que ha de resolver este problema de transportar canibales y misioneros.
+En la solución del problema se utiliza una cola (deque) para ir guardando los nuevos estados a partir de la condiguración inicial (initial_config), considerando 5 casos para la generación de nuevos estados:</p>
+<p>1.-Trasladar a dos canibales en el bote</p>
+<p>2.-Trasladar a dos misioneros en el bote</p>
+<p>3.-Trasladar a un misionero y a un caníbal en el bote</p>
+<p>4.-Trasladar solo a un misionero en el bote</p>
+<p>5.-Trasladar solo a un caníbal en el bote</p>
+<p>También se lleva un control de que lado esta el bote, indicando que 1 significa que el bote esta de ese lado y 0 que ya se movio a otro lado, por ejemplo:</p>
+<p>[2,2,0,1,1,1], significa que el bote (1) esta del lado derecho.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[54]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="k">def</span> <span class="nf">apocalypsis</span><span class="p">():</span>
+<div class=" highlight hl-ipython3"><pre><span class="c">#apocalypsis es nuestro algoritmo para solucionar nuestro problema de los canibales y  misioneros</span>
+<span class="k">def</span> <span class="nf">apocalypsis</span><span class="p">():</span>
     
-    <span class="n">q</span> <span class="o">=</span> <span class="n">deque</span><span class="p">()</span>
-    <span class="n">q</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">initial_state</span><span class="p">)</span>
-    <span class="n">antecesores</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">q</span> <span class="o">=</span> <span class="n">deque</span><span class="p">()</span><span class="c">#inicializando mi cola para los estados</span>
+    <span class="n">q</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">initial_state</span><span class="p">)</span><span class="c">#Guardar el primer estado en la cola</span>
+    <span class="n">antecesores</span> <span class="o">=</span> <span class="p">[]</span><span class="c">#arreglo para almacenar mis antecesores</span>
     <span class="n">cont</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">out</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="c">#while cont &lt; 5:</span>
+    
     <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">q</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
-        <span class="n">out</span> <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="n">popleft</span><span class="p">()</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="n">popleft</span><span class="p">()</span><span class="c">#expulsar los primeros elementos de la cola para procesarlos</span>
         
+        <span class="c">#comparando si es la solución para terminar la ejecución del algoritmo</span>
         <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">out</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">==</span> <span class="nb">str</span><span class="p">(</span><span class="n">final_config</span><span class="p">):</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s">&quot;Si lo encontro&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s">&quot;Si lo encontro en &quot;</span><span class="p">,</span><span class="n">cont</span><span class="p">,</span><span class="s">&quot; movimientos</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span>
             <span class="n">antecesores</span> <span class="o">=</span> <span class="p">[</span><span class="n">n</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">out</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
             <span class="n">antecesores</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">out</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-            <span class="n">ultimo_estado</span> <span class="o">=</span> <span class="p">[</span><span class="n">out</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">antecesores</span><span class="p">]</span>
+            <span class="n">ultimo_estado</span> <span class="o">=</span> <span class="p">[</span><span class="n">out</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">antecesores</span><span class="p">]</span><span class="c">#ultimo estado retornando</span>
             <span class="k">return</span> <span class="n">ultimo_estado</span>
         
+        <span class="c">#recorriendo el arreglo para agregar el nuevo antecesor</span>
         <span class="n">antecesores</span> <span class="o">=</span> <span class="p">[</span><span class="n">n</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">out</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
         <span class="n">antecesores</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">out</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
         
-        <span class="n">estado</span> <span class="o">=</span> <span class="n">out</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="c">#print(&quot;\nestado &quot;,estado,&quot;\n&quot;)</span>
+        <span class="n">estado</span> <span class="o">=</span> <span class="n">out</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="c">#a estado se le da la nueva configuracion para generar mas estados</span>
         
-        <span class="k">if</span> <span class="n">estado</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">estado</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span><span class="c">#Si estado[2] es igual 1 entonces el bote esta del lado izquierdo</span>
             <span class="n">c1</span> <span class="o">=</span> <span class="n">estado</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
             <span class="n">m1</span> <span class="o">=</span> <span class="n">estado</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
             <span class="n">b1</span> <span class="o">=</span> <span class="mi">0</span>
@@ -317,13 +326,15 @@ En la solución del problema se utiliza una cola (deque) para ir guardando los n
             <span class="n">m2</span> <span class="o">=</span> <span class="n">estado</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
             <span class="n">b2</span> <span class="o">=</span> <span class="mi">1</span>
             
+            <span class="c">#transaportando dos canibales del lado derecho</span>
             <span class="k">if</span> <span class="n">c1</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="p">((</span><span class="n">c1</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">&lt;=</span> <span class="n">m1</span> <span class="ow">and</span> <span class="n">c2</span><span class="o">+</span><span class="mi">2</span><span class="o">&lt;=</span><span class="n">m2</span><span class="p">)</span> <span class="ow">or</span> <span class="p">((</span><span class="n">m1</span><span class="o">==</span><span class="mi">0</span> <span class="ow">or</span> <span class="n">m1</span><span class="o">==</span><span class="mi">3</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">m2</span><span class="o">==</span><span class="mi">0</span> <span class="ow">or</span> <span class="n">m2</span><span class="o">==</span><span class="mi">3</span><span class="p">))):</span>
                 <span class="n">nuevoEstado</span> <span class="o">=</span> <span class="p">[</span><span class="n">c1</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="n">m1</span><span class="p">,</span><span class="n">b1</span><span class="p">,</span><span class="n">c2</span><span class="o">+</span><span class="mi">2</span><span class="p">,</span><span class="n">m2</span><span class="p">,</span><span class="n">b2</span><span class="p">]</span>
                 <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">nuevoEstado</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">visitados</span><span class="p">:</span>
                     <span class="n">state</span> <span class="o">=</span> <span class="p">[</span><span class="n">nuevoEstado</span><span class="p">,</span><span class="n">antecesores</span><span class="p">]</span>
                     <span class="n">visitados</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">nuevoEstado</span><span class="p">)]</span> <span class="o">=</span> <span class="k">True</span>
                     <span class="n">q</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
-                        
+            
+            <span class="c">#transaportando dos misioneros del lado derecho            </span>
             <span class="k">if</span> <span class="n">m1</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="p">((</span><span class="n">c1</span> <span class="o">&lt;=</span> <span class="n">m1</span> <span class="o">-</span><span class="mi">2</span> <span class="ow">and</span> <span class="n">c2</span><span class="o">&lt;=</span><span class="n">m2</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span> <span class="ow">or</span> <span class="p">((</span><span class="n">m1</span><span class="o">-</span><span class="mi">2</span><span class="o">==</span><span class="mi">0</span> <span class="ow">or</span> <span class="n">m1</span><span class="o">-</span><span class="mi">2</span><span class="o">==</span><span class="mi">3</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">m2</span><span class="o">+</span><span class="mi">2</span><span class="o">==</span><span class="mi">0</span> <span class="ow">or</span> <span class="n">m2</span><span class="o">+</span><span class="mi">2</span><span class="o">==</span><span class="mi">3</span><span class="p">))):</span>
                 <span class="n">nuevoEstado</span> <span class="o">=</span> <span class="p">[</span><span class="n">c1</span><span class="p">,</span><span class="n">m1</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="n">b1</span><span class="p">,</span><span class="n">c2</span><span class="p">,</span><span class="n">m2</span><span class="o">+</span><span class="mi">2</span><span class="p">,</span><span class="n">b2</span><span class="p">]</span>
                 <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">nuevoEstado</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">visitados</span><span class="p">:</span>
@@ -331,6 +342,7 @@ En la solución del problema se utiliza una cola (deque) para ir guardando los n
                     <span class="n">visitados</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">nuevoEstado</span><span class="p">)]</span> <span class="o">=</span> <span class="k">True</span>
                     <span class="n">q</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
             
+            <span class="c">#transaportando un canibal y un misionero del lado derecho</span>
             <span class="k">if</span> <span class="n">m1</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">c1</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">&gt;=</span><span class="mi">0</span> <span class="ow">and</span> <span class="p">((</span><span class="n">c1</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">m1</span> <span class="o">-</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">c2</span><span class="o">+</span><span class="mi">1</span><span class="o">&lt;=</span><span class="n">m2</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="ow">or</span> <span class="p">((</span><span class="n">m1</span><span class="o">-</span><span class="mi">1</span><span class="o">==</span><span class="mi">0</span> <span class="ow">or</span> <span class="n">m1</span><span class="o">-</span><span class="mi">1</span><span class="o">==</span><span class="mi">3</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">m2</span><span class="o">+</span><span class="mi">1</span><span class="o">==</span><span class="mi">0</span> <span class="ow">or</span> <span class="n">m2</span><span class="o">+</span><span class="mi">1</span><span class="o">==</span><span class="mi">3</span><span class="p">))):</span>
                 <span class="n">nuevoEstado</span> <span class="o">=</span> <span class="p">[</span><span class="n">c1</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">m1</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">b1</span><span class="p">,</span><span class="n">c2</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">m2</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">b2</span><span class="p">]</span>
                 <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">nuevoEstado</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">visitados</span><span class="p">:</span>
@@ -338,6 +350,7 @@ En la solución del problema se utiliza una cola (deque) para ir guardando los n
                     <span class="n">visitados</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">nuevoEstado</span><span class="p">)]</span> <span class="o">=</span> <span class="k">True</span>
                     <span class="n">q</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
             
+            <span class="c">#transaportando solo un canibal del lado derecho</span>
             <span class="k">if</span> <span class="n">c1</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="p">((</span><span class="n">c1</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">m1</span> <span class="ow">and</span> <span class="n">c2</span><span class="o">+</span><span class="mi">1</span><span class="o">&lt;=</span><span class="n">m2</span><span class="p">)</span> <span class="ow">or</span> <span class="p">((</span><span class="n">m1</span><span class="o">==</span><span class="mi">0</span> <span class="ow">or</span> <span class="n">m1</span><span class="o">==</span><span class="mi">3</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">m2</span><span class="o">==</span><span class="mi">3</span> <span class="ow">or</span> <span class="n">m2</span><span class="o">==</span><span class="mi">0</span><span class="p">))):</span>
                 <span class="n">nuevoEstado</span> <span class="o">=</span> <span class="p">[</span><span class="n">c1</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">m1</span><span class="p">,</span><span class="n">b1</span><span class="p">,</span><span class="n">c2</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">m2</span><span class="p">,</span><span class="n">b2</span><span class="p">]</span>
                 <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">nuevoEstado</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">visitados</span><span class="p">:</span>
@@ -345,6 +358,7 @@ En la solución del problema se utiliza una cola (deque) para ir guardando los n
                     <span class="n">visitados</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">nuevoEstado</span><span class="p">)]</span> <span class="o">=</span> <span class="k">True</span>
                     <span class="n">q</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
             
+            <span class="c">#transaportando solo un misionero del lado derecho</span>
             <span class="k">if</span> <span class="n">m1</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="p">((</span><span class="n">c1</span> <span class="o">&lt;=</span> <span class="n">m1</span><span class="o">-</span><span class="mi">1</span> <span class="ow">and</span> <span class="n">c2</span><span class="o">&lt;=</span><span class="n">m2</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="ow">or</span> <span class="p">((</span><span class="n">m1</span><span class="o">-</span><span class="mi">1</span><span class="o">==</span><span class="mi">0</span> <span class="ow">or</span> <span class="n">m1</span><span class="o">-</span><span class="mi">1</span><span class="o">==</span><span class="mi">3</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">m2</span><span class="o">+</span><span class="mi">1</span><span class="o">==</span><span class="mi">3</span> <span class="ow">or</span> <span class="n">m2</span><span class="o">+</span><span class="mi">1</span><span class="o">==</span><span class="mi">0</span><span class="p">))):</span>
                 <span class="n">nuevoEstado</span> <span class="o">=</span> <span class="p">[</span><span class="n">c1</span><span class="p">,</span><span class="n">m1</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">b1</span><span class="p">,</span><span class="n">c2</span><span class="p">,</span><span class="n">m2</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">b2</span><span class="p">]</span>
                 <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">nuevoEstado</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">visitados</span><span class="p">:</span>
@@ -360,6 +374,7 @@ En la solución del problema se utiliza una cola (deque) para ir guardando los n
             <span class="n">m2</span> <span class="o">=</span> <span class="n">estado</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
             <span class="n">b2</span> <span class="o">=</span> <span class="mi">0</span>
             
+            <span class="c">#transaportando dos canibales del lado Izquierdo</span>
             <span class="k">if</span> <span class="n">c2</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="p">((</span><span class="n">c2</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">&lt;=</span> <span class="n">m1</span> <span class="ow">and</span> <span class="n">c1</span><span class="o">+</span><span class="mi">2</span><span class="o">&lt;=</span><span class="n">m2</span><span class="p">)</span> <span class="ow">or</span> <span class="p">((</span><span class="n">m1</span><span class="o">==</span><span class="mi">0</span> <span class="ow">or</span> <span class="n">m1</span><span class="o">==</span><span class="mi">3</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">m2</span><span class="o">==</span><span class="mi">3</span> <span class="ow">or</span> <span class="n">m2</span><span class="o">==</span><span class="mi">0</span><span class="p">))):</span>
                 <span class="n">nuevoEstado</span> <span class="o">=</span> <span class="p">[</span><span class="n">c1</span><span class="o">+</span><span class="mi">2</span><span class="p">,</span><span class="n">m1</span><span class="p">,</span><span class="n">b1</span><span class="p">,</span><span class="n">c2</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="n">m2</span><span class="p">,</span><span class="n">b2</span><span class="p">]</span>
                 <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">nuevoEstado</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">visitados</span><span class="p">:</span>
@@ -367,6 +382,7 @@ En la solución del problema se utiliza una cola (deque) para ir guardando los n
                     <span class="n">visitados</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">nuevoEstado</span><span class="p">)]</span> <span class="o">=</span> <span class="k">True</span>
                     <span class="n">q</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
             
+            <span class="c">#transaportando dos misioneros del lado Izquierdo</span>
             <span class="k">if</span> <span class="n">m2</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="p">((</span><span class="n">c1</span> <span class="o">&lt;=</span> <span class="n">m1</span><span class="o">+</span><span class="mi">2</span> <span class="ow">and</span> <span class="n">c2</span><span class="o">&lt;=</span><span class="n">m2</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span> <span class="ow">or</span> <span class="p">((</span><span class="n">m1</span><span class="o">+</span><span class="mi">2</span><span class="o">==</span><span class="mi">0</span> <span class="ow">or</span> <span class="n">m1</span><span class="o">+</span><span class="mi">2</span><span class="o">==</span><span class="mi">3</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">m2</span><span class="o">-</span><span class="mi">2</span><span class="o">==</span><span class="mi">3</span> <span class="ow">or</span> <span class="n">m2</span><span class="o">-</span><span class="mi">2</span><span class="o">==</span><span class="mi">0</span><span class="p">))):</span>
                 <span class="n">nuevoEstado</span> <span class="o">=</span> <span class="p">[</span><span class="n">c1</span><span class="p">,</span><span class="n">m1</span><span class="o">+</span><span class="mi">2</span><span class="p">,</span><span class="n">b1</span><span class="p">,</span><span class="n">c2</span><span class="p">,</span><span class="n">m2</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="n">b2</span><span class="p">]</span>
                 <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">nuevoEstado</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">visitados</span><span class="p">:</span>
@@ -374,6 +390,7 @@ En la solución del problema se utiliza una cola (deque) para ir guardando los n
                     <span class="n">visitados</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">nuevoEstado</span><span class="p">)]</span> <span class="o">=</span> <span class="k">True</span>
                     <span class="n">q</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
             
+            <span class="c">#transaportando un canibal y un misionero del lado Izquierdo</span>
             <span class="k">if</span> <span class="n">m2</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">c2</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">&gt;=</span><span class="mi">0</span> <span class="ow">and</span> <span class="p">((</span><span class="n">c1</span><span class="o">+</span><span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">m1</span><span class="o">+</span><span class="mi">1</span> <span class="ow">and</span> <span class="n">c2</span><span class="o">-</span><span class="mi">1</span><span class="o">&lt;=</span><span class="n">m2</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="ow">or</span> <span class="p">((</span><span class="n">m1</span><span class="o">+</span><span class="mi">1</span><span class="o">==</span><span class="mi">0</span> <span class="ow">or</span> <span class="n">m1</span><span class="o">+</span><span class="mi">1</span><span class="o">==</span><span class="mi">3</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">m2</span><span class="o">-</span><span class="mi">1</span><span class="o">==</span><span class="mi">3</span> <span class="ow">or</span> <span class="n">m2</span><span class="o">-</span><span class="mi">1</span><span class="o">==</span><span class="mi">0</span><span class="p">))):</span>
                 <span class="n">nuevoEstado</span> <span class="o">=</span> <span class="p">[</span><span class="n">c1</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">m1</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">b1</span><span class="p">,</span><span class="n">c2</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">m2</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">b2</span><span class="p">]</span>
                 <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">nuevoEstado</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">visitados</span><span class="p">:</span>
@@ -381,13 +398,15 @@ En la solución del problema se utiliza una cola (deque) para ir guardando los n
                     <span class="n">visitados</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">nuevoEstado</span><span class="p">)]</span> <span class="o">=</span> <span class="k">True</span>
                     <span class="n">q</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
             
+            <span class="c">#transaportando solo un canibal del lado Izquierdo</span>
             <span class="k">if</span> <span class="n">c2</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="p">((</span><span class="n">c1</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">m1</span> <span class="ow">and</span> <span class="n">c2</span><span class="o">-</span><span class="mi">1</span><span class="o">&lt;=</span><span class="n">m2</span><span class="p">)</span> <span class="ow">or</span> <span class="p">((</span><span class="n">m1</span><span class="o">==</span><span class="mi">0</span> <span class="ow">or</span> <span class="n">m1</span><span class="o">==</span><span class="mi">3</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">m2</span><span class="o">==</span><span class="mi">3</span> <span class="ow">or</span> <span class="n">m2</span><span class="o">==</span><span class="mi">0</span><span class="p">))):</span>
                 <span class="n">nuevoEstado</span> <span class="o">=</span> <span class="p">[</span><span class="n">c1</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">m1</span><span class="p">,</span><span class="n">b1</span><span class="p">,</span><span class="n">c2</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">m2</span><span class="p">,</span><span class="n">b2</span><span class="p">]</span>
                 <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">nuevoEstado</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">visitados</span><span class="p">:</span>
                     <span class="n">state</span> <span class="o">=</span> <span class="p">[</span><span class="n">nuevoEstado</span><span class="p">,</span><span class="n">antecesores</span><span class="p">]</span>
                     <span class="n">visitados</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">nuevoEstado</span><span class="p">)]</span> <span class="o">=</span> <span class="k">True</span>
                     <span class="n">q</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
-            
+                    
+            <span class="c">#transaportando solo un misionero del lado Izquierdo</span>
             <span class="k">if</span> <span class="n">m2</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="p">((</span><span class="n">c1</span> <span class="o">&lt;=</span> <span class="n">m1</span><span class="o">+</span><span class="mi">1</span> <span class="ow">and</span> <span class="n">c2</span><span class="o">&lt;=</span><span class="n">m2</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="ow">or</span> <span class="p">((</span><span class="n">m1</span><span class="o">+</span><span class="mi">1</span><span class="o">==</span><span class="mi">0</span> <span class="ow">or</span> <span class="n">m1</span><span class="o">+</span><span class="mi">1</span><span class="o">==</span><span class="mi">3</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">m2</span><span class="o">-</span><span class="mi">1</span><span class="o">==</span><span class="mi">3</span> <span class="ow">or</span> <span class="n">m2</span><span class="o">-</span><span class="mi">1</span><span class="o">==</span><span class="mi">0</span><span class="p">))):</span>
                 <span class="n">nuevoEstado</span> <span class="o">=</span> <span class="p">[</span><span class="n">c1</span><span class="p">,</span><span class="n">m1</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">b1</span><span class="p">,</span><span class="n">c2</span><span class="p">,</span><span class="n">m2</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">b2</span><span class="p">]</span>
                 <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">nuevoEstado</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">visitados</span><span class="p">:</span>
@@ -416,7 +435,7 @@ En la solución del problema se utiliza una cola (deque) para ir guardando los n
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[55]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="o">%</span><span class="k">time</span> apocalypsis()
@@ -432,14 +451,15 @@ En la solución del problema se utiliza una cola (deque) para ir guardando los n
 
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Si lo encontro
-CPU times: user 0 ns, sys: 0 ns, total: 0 ns
-Wall time: 510 µs
+<pre>Si lo encontro en  14  movimientos
+
+CPU times: user 4 ms, sys: 0 ns, total: 4 ms
+Wall time: 551 µs
 </pre>
 </div>
 </div>
 
-<div class="output_area"><div class="prompt output_prompt">Out[55]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[8]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -469,15 +489,39 @@ Wall time: 510 µs
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Se puede observar que se llego al estado deseado y a parte de eso se muestra todos los movimientos que se genero para llegar al estado final.</p>
+<p>Se puede observar que se llego al estado deseado y también se muestra todos los movimientos que se genero para llegar al estado final que en total fueron 12 movimientos, 12 formas de pasar a todos de un lado.</p>
 <p>A continuación se muestra la estructura llamada visitados, donde se albergo todos los estados generados:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>[[0, 0, 0, 3, 3, 1], <strong>Se llego al estado final.</strong></p>
+<p>[[3, 3, 1, 0, 0, 0], <strong>Estado inicial.</strong></p>
+<p>[1, 3, 0, 2, 0, 1], <strong>Transportando dos canibales del lado derecho.</strong></p>
+<p>[2, 3, 1, 1, 0, 0], <strong>Regresa un canibal para el lado izquierdo para llevarse a otro.</strong></p>
+<p>[0, 3, 0, 3, 0, 1], <strong>Llevandose a otro canibal del lado izquierdo, para no quedar mas canibales.</strong></p>
+<p>[1, 3, 1, 2, 0, 0], <strong>Volviendo un canibal para el lado izquierdo y llevarse a otro pasajero.</strong></p>
+<p>[1, 1, 0, 2, 2, 1], <strong>Se baja el canibal, y se van dos misioneros del lado derecho para equilibrar.</strong></p>
+<p>[2, 2, 1, 1, 1, 0], <strong>Vuelven del lado izquierdo un canibal y un misionero, para seguir equilibrados.</strong></p>
+<p>[2, 0, 0, 1, 3, 1], <strong>Ahora los dos misioneros restantes del lado izquierdo se van al lado derecho.</strong></p>
+<p>[3, 0, 1, 0, 3, 0], <strong>Para el lado izquiero se regresa solo un canibal y todo sigue equilibrado.</strong></p>
+<p>[1, 0, 0, 2, 3, 1], <strong>Ahora pasan del lado derecho dos canibales.</strong></p>
+<p>[2, 0, 1, 1, 3, 0], <strong>Se regresa solo un canibal para regresar por su camarada y ya terminar.</strong></p>
+<p>[0, 0, 0, 3, 3, 1]  <strong>Por último los dos canibales restantes del lado izquierdo pasan del lado derecho para terminar con el proceso y llegar a cumplir el estado final.</strong>
+  ]]</p>
+<p>Recalcar que una de las condiciones que se tiene para generar un <strong><em>estado aceptable</em></strong> en el algoritmo es que se tenga mas misioneros que canibales, entonces, como se puede observar los movimientos que se generaron para llegar al estado final, hay casos que hay mas canibales que misioneros, pero, este caso se da cuando hay n&gt;0 canibales y 0 misioneros, esto significa que si hay mas canibales que misioneros, pero en este caso hay 0 misioneros, por lo cual no queda misioneros que se puedan comer los canibales, y por defecto es un estado aceptable, solo para aclarar.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[56]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="n">visitados</span>
@@ -491,7 +535,7 @@ Wall time: 510 µs
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[56]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[9]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -530,7 +574,7 @@ Wall time: 510 µs
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[57]:</div>
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="nb">len</span><span class="p">(</span><span class="n">visitados</span><span class="p">)</span>
@@ -544,7 +588,7 @@ Wall time: 510 µs
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[57]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[10]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -562,18 +606,8 @@ Wall time: 510 µs
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Tiempo-de-procesamiento">Tiempo de procesamiento<a class="anchor-link" href="#Tiempo-de-procesamiento">&#182;</a></h1><p>Se muestra a continuación el total de tiempo que le llevo al algoritmo ejecutarse:</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Conclusiones">Conclusiones<a class="anchor-link" href="#Conclusiones">&#182;</a></h1><p>Como se puede ver, se llegó a la solución esperada, con un tiempo de ejecución aceptable.
-Además de que al problema se le vio como una busqueda (en anchura) para llegar a la solución aplicando los anteriores algoritmos vistos.</p>
+<h1 id="Conclusiones">Conclusiones<a class="anchor-link" href="#Conclusiones">&#182;</a></h1><p>Se generaron 15 estados visitados para llegar a la solución planteada al inicio, además de que el tiempo de ejecución fue aceptable.
+Además de que al problema se le vio como una busqueda (en anchura) para llegar a la solución aplicando los anteriores algoritmos vistos, eso es todo amigos.</p>
 
 </div>
 </div>
